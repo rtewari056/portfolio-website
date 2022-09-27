@@ -25,6 +25,8 @@ const Skills = () => {
     fetchSkillsAndExperiencesSection();
   }, []);
 
+  const [tooltip, showTooltip] = useState(true);
+
   return (
     <>
       <h2 className="head-text">Skills & Experiences</h2>
@@ -66,19 +68,27 @@ const Skills = () => {
                       data-tip
                       data-for={work.name}
                       key={work.name}
+                      onMouseEnter={() => showTooltip(true)}
+                      onMouseLeave={() => {
+                        showTooltip(false);
+                        setTimeout(() => showTooltip(true), 50);
+                      }}
                     >
                       <h4 className="bold-text">{work.name}</h4>
                       <p className="p-text">{work.company}</p>
                     </motion.div>
 
-                    <ReactTooltip
-                      id={work.name}
-                      effect="solid"
-                      arrowColor="#fff"
-                      className="skills-tooltip"
-                    >
-                      {work.desc}
-                    </ReactTooltip>
+                    {/* React 18: Tooltips not hiding quick fix until the package is updated */}
+                    {tooltip && (
+                      <ReactTooltip
+                        id={work.name}
+                        effect="solid"
+                        arrowColor="#fff"
+                        className="skills-tooltip"
+                      >
+                        {work.desc}
+                      </ReactTooltip>
+                    )}
                   </React.Fragment>
                 ))}
               </motion.div>
