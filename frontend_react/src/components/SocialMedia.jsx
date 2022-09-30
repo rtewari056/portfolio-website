@@ -6,13 +6,37 @@ const SocialMedia = () => {
   return (
     <div className="app__social">
       <div>
-        <BsLinkedin />
+        <a
+          href="https://www.linkedin.com/in/rtewari056/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <BsLinkedin />
+        </a>
+
+        {/* <BsLinkedin /> */}
       </div>
       <div>
-        <GoMarkGithub />
+        <a
+          href="https://github.com/rtewari056"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GoMarkGithub />
+        </a>
+
+        {/* <GoMarkGithub /> */}
       </div>
       <div>
-        <BsTwitter />
+        <a
+          href="https://twitter.com/rtewari056"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <BsTwitter />
+        </a>
+
+        {/* <BsTwitter /> */}
       </div>
     </div>
   );
