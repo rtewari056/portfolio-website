@@ -5,39 +5,35 @@ import { GoMarkGithub } from "react-icons/go";
 const SocialMedia = () => {
   return (
     <div className="app__social">
-      <div>
-        <a
-          href="https://www.linkedin.com/in/rtewari056/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      <a
+        href="https://www.linkedin.com/in/rtewari056/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div>
           <BsLinkedin />
-        </a>
+        </div>
+      </a>
 
-        {/* <BsLinkedin /> */}
-      </div>
-      <div>
-        <a
-          href="https://github.com/rtewari056"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      <a
+        href="https://github.com/rtewari056"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div>
           <GoMarkGithub />
-        </a>
+        </div>
+      </a>
 
-        {/* <GoMarkGithub /> */}
-      </div>
-      <div>
-        <a
-          href="https://twitter.com/rtewari056"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      <a
+        href="https://twitter.com/rtewari056"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div>
           <BsTwitter />
-        </a>
-
-        {/* <BsTwitter /> */}
-      </div>
+        </div>
+      </a>
     </div>
   );
 };
