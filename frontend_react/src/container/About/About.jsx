@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { BiFile } from "react-icons/bi";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
 import "./About.scss";
 
 const About = () => {
-  const [abouts, setAbouts] = useState([]);
+  const [about, setAbout] = useState([]);
 
   const fetchAboutSection = async () => {
-    const query = '*[_type == "abouts"]';
+    const query = '*[_type == "about"]';
 
     const response = await client.fetch(query);
-    setAbouts(response);
+    console.log(response);
+    setAbout(response);
   };
 
   useEffect(() => {
@@ -22,27 +24,28 @@ const About = () => {
   return (
     <>
       <h2 className="head-text">
-        I know that <span> Good Development </span> <br /> means
-        <span> Good Business </span>
+        About <span>Me</span>
       </h2>
 
       <div className="app__profiles">
-        {abouts.map((about, index) => (
-          <motion.div
-            key={about.title + index}
-            className="app__profile-item"
-            whileInView={{ opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.5, type: "tween" }}
-          >
-            <img src={urlFor(about.imgUrl)} alt={about.title} />
-            <h2 className="bold-text" style={{ marginTop: "20px" }}>
-              {about.title}
-            </h2>
-            <p className="p-text" style={{ marginTop: "10px" }}>
-              {about.description}
-            </p>
-          </motion.div>
+        {about.map((abt) => (
+          <React.Fragment key={abt._type}>
+            <motion.div
+              className="app__profile-item"
+              whileInView={{ opacity: 1 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.5, type: "tween" }}
+            >
+              <img src={urlFor(abt.imgUrl)} alt={abt._type + "Profile Image"} />
+            </motion.div>
+
+            <div className="app__profile-text">
+              {abt.description}
+              <a href={abt.resumeLink} target="_blank" rel="noopener noreferrer">
+                <button>See My Resume <BiFile size={20} style={{marginLeft: "5px"}} /></button>
+              </a>
+            </div>
+          </React.Fragment>
         ))}
       </div>
     </>
