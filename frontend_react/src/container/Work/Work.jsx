@@ -81,7 +81,7 @@ const Work = () => {
                   staggerChildren: 0.5,
                 }}
               >
-                <a href={work.projectLink} target="_blank" rel="noreferrer">
+                <a title="View Demo" href={work.projectLink} target="_blank" rel="noreferrer">
                   <motion.div
                     className="app__flex"
                     whileInView={{ scale: [0, 1] }}
@@ -92,7 +92,7 @@ const Work = () => {
                   </motion.div>
                 </a>
 
-                <a href={work.codeLink} target="_blank" rel="noreferrer">
+                <a title="Source Code" href={work.codeLink} target="_blank" rel="noreferrer">
                   <motion.div
                     className="app__flex"
                     whileInView={{ scale: [0, 1] }}
@@ -122,4 +122,4 @@ const Work = () => {
   );
 };
 
-export default AppWrap(MotionWrap(Work, "app__works"), "work", "app__primarybg");
+export default AppWrap(MotionWrap(Work, "app__works"), "works", "app__primarybg");

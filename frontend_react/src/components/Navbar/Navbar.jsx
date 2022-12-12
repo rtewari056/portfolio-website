@@ -7,6 +7,7 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const navLinks = [{name: "home", link: "home"}, {name: "about", link: "about"}, {name: "works", link: "works"}, {name: "skills", link: "skills"}, {name: "open source", link: "opensource"}, {name: "contact", link: "contact"}]
 
   return (
     <nav className="app__navbar">
@@ -15,10 +16,10 @@ const Navbar = () => {
       </div>
       <ul className="app__navbar-links">
         {/* Loop through elements present on the navbar */}
-        {["home", "about", "work", "skills", "contact"].map((item) => (
-          <li className="app__flex p-text" key={`link-${item}`}>
+        {navLinks.map((item) => (
+          <li className="app__flex p-text" key={`link-${item.name}`}>
             <div /> {/* Empty div for apply styling later */}
-            <a href={`#${item}`}>{item}</a>
+            <a href={`#${item.link}`}>{item.name}</a>
           </li>
         ))}
       </ul>
@@ -34,10 +35,10 @@ const Navbar = () => {
           >
             <HiX onClick={() => setToggle(false)} />
             <ul>
-              {["home", "about", "work", "skills", "contact"].map((item) => (
-                <li key={item}>
-                  <a href={`#${item}`} onClick={() => setToggle(false)}>
-                    {item}
+              {navLinks.map((item) => (
+                <li key={`menu-${item.name}`}>
+                  <a href={`#${item.link}`} onClick={() => setToggle(false)}>
+                    {item.name}
                   </a>
                 </li>
               ))}

@@ -3,7 +3,7 @@ import React from "react";
 const NavigationDots = ({ active }) => {
   return (
     <div className="app__navigation">
-      {["home", "about", "work", "skills", "testimonials", "contact"].map(
+      {["home", "about", "works", "skills", "opensource", "contact"].map(
         (item, index) => (
           // eslint-disable-next-line
           <a

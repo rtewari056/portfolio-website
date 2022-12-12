@@ -13,7 +13,6 @@ const About = () => {
     const query = '*[_type == "about"]';
 
     const response = await client.fetch(query);
-    console.log(response);
     setAbout(response);
   };
 
