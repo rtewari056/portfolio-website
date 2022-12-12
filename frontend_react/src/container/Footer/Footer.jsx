@@ -1,43 +1,58 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 import { images } from "../../constants";
 import { AppWrap, MotionWrap } from "../../wrapper";
-import { client } from "../../client";
+import { validateEmail, Notify } from "../../utils";
+
 import "./Footer.scss";
 
 const Footer = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     message: "",
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const { username, email, message } = formData;
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    setLoading(true);
+  const handleSubmit = async () => {
+    setIsLoading(true);
 
-    const contact = {
-      _type: "contact",
-      name: formData.username,
-      email: formData.email,
-      message: formData.message,
-    };
+    // If any field is missing
+    if (!formData.name || !formData.email || !formData.message) {
+      setIsLoading(false);
+      return Notify("Please fill all the fields", "warn");
+    }
 
-    client
-      .create(contact)
-      .then(() => {
-        setLoading(false);
-        setIsFormSubmitted(true);
-      })
-      .catch((err) => console.log(err));
+    // Check email is valid
+    if (validateEmail(formData.email) === false) {
+      setIsLoading(false);
+      return Notify("Email is not valid", "warn");
+    }
+
+    // Send Email using EmailJS
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAIL_JS_SERVICE_ID,
+        process.env.REACT_APP_EMAIL_JS_TEMPLATE_ID,
+        formData,
+        process.env.REACT_APP_EMAIL_JS_PUBLIC_KEY
+      )
+      .then(
+        function (response) {
+          setIsLoading(false);
+          return setIsFormSubmitted(true);
+        },
+        function (error) {
+          setIsLoading(false);
+          return Notify("Some error occured", "error");
+        }
+      );
   };
 
   return (
@@ -65,9 +80,9 @@ const Footer = () => {
               className="p-text"
               type="text"
               placeholder="Your Name"
-              name="username"
-              value={username}
-              onChange={handleChangeInput}
+              name="name"
+              value={formData.name}
+              onChange={(e) => handleChangeInput(e)}
             />
           </div>
           <div className="app__flex">
@@ -76,21 +91,26 @@ const Footer = () => {
               type="email"
               placeholder="Your Email"
               name="email"
-              value={email}
-              onChange={handleChangeInput}
+              value={formData.email}
+              onChange={(e) => handleChangeInput(e)}
             />
           </div>
           <div>
             <textarea
               className="p-text"
               placeholder="Your Message"
-              value={message}
+              value={formData.message}
               name="message"
-              onChange={handleChangeInput}
+              onChange={(e) => handleChangeInput(e)}
             />
           </div>
-          <button type="button" className="p-text" onClick={handleSubmit}>
-            {!loading ? "Send Message" : "Sending..."}
+          <button
+            type="button"
+            className="p-text"
+            disabled={!isLoading ? false : true}
+            onClick={handleSubmit}
+          >
+            {!isLoading ? "Send Message" : "Sending..."}
           </button>
         </div>
       ) : (
