@@ -1,5 +1,5 @@
 // Importing images from assets folder
-import email from '../assets/email.png';
+import email from '../assets/email.svg';
 import mobile from '../assets/mobile.png';
 import api from '../assets/api.png';
 import cpp from '../assets/cpp.png';

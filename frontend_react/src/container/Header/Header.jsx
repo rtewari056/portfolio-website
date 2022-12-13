@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { AppWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
 import { images } from "../../constants";
+
 import "./Header.scss";
 
 const scaleVariants = {

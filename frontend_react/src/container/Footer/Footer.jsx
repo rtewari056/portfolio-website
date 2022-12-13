@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import { images } from "../../constants";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { validateEmail, Notify } from "../../utils";
+import { client } from "../../client";
 
 import "./Footer.scss";
 
@@ -15,6 +16,19 @@ const Footer = () => {
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [contact, setContact] = useState(null);
+
+  const fetchContactSection = async () => {
+    const contactQuery = '*[_type == "contact"][0]'; // a single document (an object is returned, not an array)
+
+    const contactResponse = await client.fetch(contactQuery);
+    setContact(contactResponse);
+  };
+
+  useEffect(() => {
+    fetchContactSection();
+  }, []);
 
   const handleChangeInput = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,19 +71,27 @@ const Footer = () => {
 
   return (
     <>
-      <h2 className="head-text">Take a coffee & chat with me</h2>
+      <h2 className="head-text">
+        Take a <span>coffee</span> & <span>chat</span> with me
+      </h2>
 
       <div className="app__footer-cards">
         <div className="app__footer-card ">
           <img src={images.email} alt="email" />
-          <a href="test@gmail.com" className="p-text">
-            test@gmail.com
+          <a
+            href={`mailto:${contact !== null ? contact.email : ""}`}
+            className="p-text"
+          >
+            {contact !== null ? contact.email : ""}
           </a>
         </div>
         <div className="app__footer-card">
           <img src={images.mobile} alt="phone" />
-          <a href="tel:+91 (123) 456-7890" className="p-text">
-            +91 12345 67890
+          <a
+            href={`tel:${contact !== null ? contact.phoneNumber : ""}`}
+            className="p-text"
+          >
+            {contact !== null ? contact.phoneNumber : ""}
           </a>
         </div>
       </div>
