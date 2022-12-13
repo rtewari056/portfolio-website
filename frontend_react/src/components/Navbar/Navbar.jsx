@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import { images } from "../../constants";
 import "./Navbar.scss";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  const navLinks = [{name: "home", link: "home"}, {name: "about", link: "about"}, {name: "works", link: "works"}, {name: "skills", link: "skills"}, {name: "open source", link: "opensource"}, {name: "contact", link: "contact"}]
+  const navLinks = [
+    { name: "home", link: "home" },
+    { name: "about", link: "about" },
+    { name: "works", link: "works" },
+    { name: "skills", link: "skills" },
+    { name: "open source", link: "opensource" },
+    { name: "contact", link: "contact" },
+  ];
 
   return (
     <nav className="app__navbar">
       <div className="app__navbar-logo">
-        <img src={images.logo} alt="logo" />
+        <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+          <img src={images.logo} alt="logo" />
+        </Link>
       </div>
       <ul className="app__navbar-links">
         {/* Loop through elements present on the navbar */}
