@@ -35,7 +35,7 @@ const About = () => {
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.5, type: "tween" }}
             >
-              <img src={urlFor(abt.imgUrl)} alt={abt._type + "Profile Image"} />
+              <img src={urlFor(abt.imgUrl)} alt={`${abt._type} Profile Pic`} />
             </motion.div>
 
             <div className="app__profile-text">
