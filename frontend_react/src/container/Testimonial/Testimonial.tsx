@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import { motion } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 
-import { AppWrap, MotionWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
-import "./Testimonial.scss";
+import { AppWrap, MotionWrap } from '../../wrapper';
+import { urlFor, client } from '../../sanity-client/client';
+import './Testimonial.scss';
 
 const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [testimonials, setTestimonials] = useState([]);
-  const [brands, setBrands] = useState([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]); // FIXME:
+  const [brands, setBrands] = useState<any[]>([]); // FIXME:
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     setCurrentIndex(index);
   };
 
@@ -94,7 +94,7 @@ const Testimonial = () => {
 };
 
 export default AppWrap(
-  MotionWrap(Testimonial, "app__testimonial"),
-  "testimonials",
-  "app__primarybg"
+  MotionWrap(Testimonial, 'app__testimonial'),
+  'testimonials',
+  'app__primarybg'
 );

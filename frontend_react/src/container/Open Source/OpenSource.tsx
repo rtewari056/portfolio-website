@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-import { AppWrap, MotionWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
-import "./OpenSource.scss";
+import { AppWrap, MotionWrap } from '../../wrapper';
+import { urlFor, client } from '../../sanity-client/client';
+import './OpenSource.scss';
 
 const OpenSource = () => {
-  const [openSource, setOpenSource] = useState([]);
+  const [openSource, setOpenSource] = useState<any[]>([]); // FIXME:
 
   const fetchOpenSourceSection = async () => {
     const openSourceQuery = '*[_type == "openSource"]';

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
-import { AppWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
-import { images } from "../../constants";
+import { AppWrap } from '../../wrapper';
+import { urlFor, client } from '../../sanity-client/client';
+import { images } from '../../constants';
 
-import "./Header.scss";
+import './Header.scss';
 
 const scaleVariants = {
   whileInView: {
@@ -13,13 +13,13 @@ const scaleVariants = {
     opacity: [0, 1],
     transition: {
       duration: 1,
-      ease: "easeInOut",
+      ease: 'easeInOut',
     },
   },
 };
 
 const Header = () => {
-  const [home, setHome] = useState(null);
+  const [home, setHome] = useState<any>(null); // FIXME:
 
   const fetchHomeSection = async () => {
     const homeQuery = '*[_type == "home"][0]'; // a single document (an object is returned, not an array)
@@ -95,4 +95,4 @@ const Header = () => {
   );
 };
 
-export default AppWrap(Header, "home");
+export default AppWrap(Header, 'home');

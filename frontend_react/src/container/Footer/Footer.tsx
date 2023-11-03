@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import emailjs from "@emailjs/browser";
+import { ChangeEvent, useEffect, useState } from 'react';
+import emailjs from '@emailjs/browser';
 
-import { images } from "../../constants";
-import { AppWrap, MotionWrap } from "../../wrapper";
-import { validateEmail, Notify } from "../../utils";
-import { client } from "../../client";
+import { images } from '../../constants';
+import { AppWrap, MotionWrap } from '../../wrapper';
+import { validateEmail, Notify } from '../../utils';
+import { client } from '../../sanity-client/client';
 
-import "./Footer.scss";
+import './Footer.scss';
 
 const Footer = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [contact, setContact] = useState(null);
+  const [contact, setContact] = useState<any>(null); // FIXME:
 
   const fetchContactSection = async () => {
     const contactQuery = '*[_type == "contact"][0]'; // a single document (an object is returned, not an array)
@@ -30,7 +30,7 @@ const Footer = () => {
     fetchContactSection();
   }, []);
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -40,33 +40,38 @@ const Footer = () => {
     // If any field is missing
     if (!formData.name || !formData.email || !formData.message) {
       setIsLoading(false);
-      return Notify("Please fill all the fields", "warn");
+      return Notify('Please fill all the fields', 'warn');
     }
 
     // Check email is valid
     if (validateEmail(formData.email) === false) {
       setIsLoading(false);
-      return Notify("Email is not valid", "warn");
+      return Notify('Email is not valid', 'warn');
     }
 
     // Send Email using EmailJS
-    emailjs
-      .send(
-        process.env.REACT_APP_EMAIL_JS_SERVICE_ID,
-        process.env.REACT_APP_EMAIL_JS_TEMPLATE_ID,
-        formData,
-        process.env.REACT_APP_EMAIL_JS_PUBLIC_KEY
-      )
-      .then(
-        function (response) {
-          setIsLoading(false);
-          return setIsFormSubmitted(true);
-        },
-        function (error) {
-          setIsLoading(false);
-          return Notify("Some error occured", "error");
-        }
-      );
+    try {
+      emailjs
+        .send(
+          import.meta.env.VITE_APP_EMAIL_JS_SERVICE_ID,
+          import.meta.env.VITE_APP_EMAIL_JS_TEMPLATE_ID,
+          formData,
+          import.meta.env.VITE_APP_EMAIL_JS_PUBLIC_KEY
+        )
+        .then(
+          function () {
+            setIsLoading(false);
+            return setIsFormSubmitted(true);
+          },
+          function () {
+            setIsLoading(false);
+            return Notify('Some error occured', 'error');
+          }
+        );
+    } catch (error) {
+      setIsLoading(false);
+      return Notify('Some error occured', 'error');
+    }
   };
 
   return (

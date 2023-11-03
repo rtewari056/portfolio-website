@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import ReactTooltip from "react-tooltip";
 
-import { AppWrap, MotionWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
-import "./Skills.scss";
+import { AppWrap, MotionWrap } from '../../wrapper';
+import { urlFor, client } from '../../sanity-client/client';
+import './Skills.scss';
 
 const Skills = () => {
-  const [experiences, setExperiences] = useState([]);
-  const [skills, setSkills] = useState([]);
+  const [experiences, setExperiences] = useState<any[]>([]); // FIXME:
+  const [skills, setSkills] = useState<any[]>([]); // FIXME:
 
   const fetchSkillsAndExperiencesSection = async () => {
     const experiencesQuery = '*[_type == "experiences"]';
@@ -59,7 +59,7 @@ const Skills = () => {
               </div>
 
               <motion.div className="app__skills-exp-works">
-                {experience.works.map((work) => (
+                {experience.works.map((work: any) => (
                   <React.Fragment key={work.name}>
                     <motion.div
                       whileInView={{ opacity: [0, 1] }}
@@ -82,12 +82,10 @@ const Skills = () => {
                     {tooltip && (
                       <ReactTooltip
                         id={work.name}
-                        effect="solid"
+                        effect="float"
                         arrowColor="#fff"
                         className="skills-tooltip"
-                      >
-                        {work.desc}
-                      </ReactTooltip>
+                      >{work.desc}</ReactTooltip>
                     )}
                   </React.Fragment>
                 ))}
@@ -101,7 +99,7 @@ const Skills = () => {
 };
 
 export default AppWrap(
-  MotionWrap(Skills, "app__skills"),
-  "skills",
-  "app__whitebg"
+  MotionWrap(Skills, 'app__skills'),
+  'skills',
+  'app__whitebg'
 );

@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 import { BsTwitter, BsLinkedin } from "react-icons/bs";
-import { GoMarkGithub } from "react-icons/go";
+import { BsGithub } from "react-icons/bs";
 
 const SocialMedia = () => {
   return (
@@ -21,7 +21,7 @@ const SocialMedia = () => {
         rel="noopener noreferrer"
       >
         <div>
-          <GoMarkGithub />
+          <BsGithub />
         </div>
       </a>
 

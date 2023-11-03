@@ -1,12 +1,12 @@
-import { ToastContainer } from "react-toastify";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-import "react-toastify/dist/ReactToastify.min.css"; // CSS for "react-toastify"
+import 'react-toastify/dist/ReactToastify.min.css'; // CSS for 'react-toastify'
 
-import { About, Footer, Header, Skills, Work, OpenSource } from "./container";
-import { Navbar } from "./components";
+import { About, Footer, Header, Skills, Work, OpenSource } from './container';
+import { Navbar } from './components';
 
-import "./App.scss";
+import './App.scss';
 
 const App = () => {
   return (

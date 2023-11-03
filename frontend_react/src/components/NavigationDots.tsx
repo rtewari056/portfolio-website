@@ -1,10 +1,9 @@
-import React from "react";
 
-const NavigationDots = ({ active }) => {
+const NavigationDots = ({ active }: { active: string }) => {
   return (
     <div className="app__navigation">
       {["home", "about", "works", "skills", "opensource", "contact"].map(
-        (item, index) => (
+        (item: string, index: number) => (
           // eslint-disable-next-line
           <a
             className="app__navigation-dot"

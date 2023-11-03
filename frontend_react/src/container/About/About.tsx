@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import { BiFile } from "react-icons/bi";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
+import { urlFor, client } from "../../sanity-client/client";
 import "./About.scss";
 
 const About = () => {
-  const [about, setAbout] = useState([]);
+  const [about, setAbout] = useState<any[]>([]); // FIXME: Remove any type
 
   const fetchAboutSection = async () => {
-    const query = '*[_type == "about"]';
+    const query: string = '*[_type == "about"]';
 
     const response = await client.fetch(query);
     setAbout(response);

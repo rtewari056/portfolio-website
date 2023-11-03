@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { AiFillEye, AiFillGithub } from "react-icons/ai";
-import { motion } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { AiFillEye, AiFillGithub } from 'react-icons/ai';
+import { motion } from 'framer-motion';
 
-import { AppWrap, MotionWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
-import "./Work.scss";
+import { AppWrap, MotionWrap } from '../../wrapper';
+import { urlFor, client } from '../../sanity-client/client';
+import './Work.scss';
 
 const Work = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-  const [works, setWorks] = useState([]);
-  const [filterWork, setFilterWork] = useState([]);
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [animateCard, setAnimateCard] = useState<any>({ y: 0, opacity: 1 }); // FIXME:
+  const [works, setWorks] = useState<any[]>([]); // FIXME:
+  const [filterWork, setFilterWork] = useState<any[]>([]); // FIXME:
 
   const fetchWorkSection = async () => {
     const query = '*[_type == "works"]';
@@ -24,7 +24,7 @@ const Work = () => {
     fetchWorkSection();
   }, []);
 
-  const handleWorkFilter = (item) => {
+  const handleWorkFilter = (item: string) => {
     setActiveFilter(item);
     setAnimateCard([{ y: 100, opacity: 0 }]); // Trigger animation
 
@@ -48,7 +48,7 @@ const Work = () => {
       <div className="app__work-filter">
         {/* Filter project type */}
         {["UI/UX", "Web App", "MERN App", "React JS", "All"].map(
-          (item, index) => (
+          (item: string, index: number) => (
             <div
               key={index}
               className={`app__work-filter-item app__flex p-text ${
