@@ -2,30 +2,37 @@
   "name": "rohitportfolio",
   "private": true,
   "version": "1.0.0",
-  "description": "",
   "main": "package.json",
-  "author": "Rohit Tewari <rtewari056@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
+    "dev": "sanity dev",
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^2.33.2",
-    "@sanity/core": "^2.33.2",
-    "@sanity/default-layout": "^2.33.2",
-    "@sanity/default-login": "^2.33.2",
-    "@sanity/desk-tool": "^2.33.2",
-    "@sanity/eslint-config-studio": "^2.0.0",
-    "@sanity/vision": "^2.33.2",
-    "eslint": "^8.6.0",
-    "prop-types": "^15.7",
-    "react": "^17.0",
-    "react-dom": "^17.0",
-    "styled-components": "^5.2.0"
+    "@sanity/vision": "^3.19.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "sanity": "^3.19.1",
+    "styled-components": "^6.0.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^3.0.1",
+    "@types/react": "^18.0.25",
+    "eslint": "^8.6.0",
+    "prettier": "^3.0.2",
+    "typescript": "^5.1.6"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
+  }
 }
