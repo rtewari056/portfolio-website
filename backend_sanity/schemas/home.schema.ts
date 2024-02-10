@@ -6,6 +6,14 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'profileBackgroundCircle',
+      title: 'profileBackgroundCircle',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'profilePic',
       title: 'profilePic',
       type: 'image',
