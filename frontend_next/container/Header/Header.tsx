@@ -106,7 +106,7 @@ const Header = () => {
             urlFor(home.circleImg3),
           ].map((circle, index) => (
             <div className="circle-cmp app__flex" key={`circle-${index}`}>
-              <Image width={100} height={100} src={circle} alt="profile_bg" />
+              <Image priority width={100} height={100} src={circle} alt="profile_bg" />
             </div>
           ))}
       </motion.div>

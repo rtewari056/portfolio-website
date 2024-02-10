@@ -10,6 +10,7 @@ const NavigationDots = ({ active }: { active: string }) => {
             href={`#${item}`}
             key={item + index}
             style={active === item ? { backgroundColor: "#313BAC" } : {}}
+            aria-label={item}
           />
         )
       )}

@@ -96,7 +96,7 @@ const Skills = () => {
                         setTimeout(() => showTooltip(true), 50);
                       }}
                     >
-                      <h4 className="bold-text">{work.role}</h4>
+                      <strong className="bold-text">{work.role}</strong>
                       <p className="p-text">{work.company}</p>
                     </motion.div>
 

@@ -9,6 +9,7 @@ const SocialMedia = () => {
         href="https://www.linkedin.com/in/rtewari056/"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="LinkedIn icon"
       >
         <div>
           <BsLinkedin />
@@ -19,6 +20,7 @@ const SocialMedia = () => {
         href="https://github.com/rtewari056"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="GitHub icon"
       >
         <div>
           <BsGithub />
@@ -29,6 +31,7 @@ const SocialMedia = () => {
         href="https://twitter.com/rtewari056"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Twitter icon"
       >
         <div>
           <BsTwitter />

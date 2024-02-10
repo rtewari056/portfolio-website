@@ -82,6 +82,11 @@
     }
 }
 
+.p-text-dark {
+    @extend .p-text;
+    color: var(--dark-gray-color);
+}
+
 .bold-text {
     font-size: 1rem;
     font-weight: 800;

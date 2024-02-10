@@ -107,7 +107,7 @@ const Footer = () => {
           <Image width={100} height={100} src={images.email} alt="email" />
           <a
             href={`mailto:${contact !== null ? contact.email : ""}`}
-            className="p-text"
+            className="p-text-dark"
           >
             {contact !== null ? contact.email : ""}
           </a>
@@ -116,7 +116,7 @@ const Footer = () => {
           <Image width={100} height={100} src={images.mobile} alt="phone" />
           <a
             href={`tel:${contact !== null ? contact.phoneNumber : ""}`}
-            className="p-text"
+            className="p-text-dark"
           >
             {contact !== null ? contact.phoneNumber : ""}
           </a>
@@ -131,6 +131,7 @@ const Footer = () => {
               placeholder="Your Name"
               name="name"
               value={formData.name}
+              autoComplete="off"
               onChange={(e) => handleChangeInput(e)}
             />
           </div>
@@ -141,6 +142,7 @@ const Footer = () => {
               placeholder="Your Email"
               name="email"
               value={formData.email}
+              autoComplete="off"
               onChange={(e) => handleChangeInput(e)}
             />
           </div>
