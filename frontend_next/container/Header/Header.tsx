@@ -1,15 +1,20 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-import { AppWrap } from '../../wrapper';
-import { urlFor, client } from '../../sanity-client/client';
-// import { images } from '../../constants';
+// Component Wrapper
+import { AppWrap } from '@/wrapper';
 
-import './Header.scss';
-import Image from 'next/image';
+// Sanity Client
+import { urlFor, client } from '@/sanity-client/client';
+
+// Type
 import { Home } from '@/models/Portfolio.type';
+
+// Style
+import './Header.scss';
 
 const scaleVariants = {
   whileInView: {
@@ -23,21 +28,21 @@ const scaleVariants = {
 };
 
 const Header = () => {
-  const [home, setHome] = useState<Home | null>(null); // FIXME:
+  const [home, setHome] = useState<Home | null>(null);
 
   async function fetchHomeSection() {
-    const homeQuery = `*[_type == "home"][0]{
+    // A single document (an object is returned, not an array)
+    const homeQuery: string = `*[_type == "home"][0]{
       profileBackgroundCircle,
       profilePic,
       circleImg1,
       circleImg2,
       circleImg3,
-    }`; // a single document (an object is returned, not an array)
+    }`;
   
-    const data = await client.fetch<Home>(homeQuery);
+    const response = await client.fetch<Home>(homeQuery);
   
-    setHome(data);
-  
+    setHome(response);
   }
 
   useEffect(() => {

@@ -3,16 +3,24 @@
 import { useState } from 'react';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
-// import { Link } from 'react-router-dom';
-
-import { images } from '../../constants';
-import './Navbar.scss';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+
+// Image
+import { images } from '@/constants';
+
+// Style
+import './Navbar.scss';
+
+// Type
+type NavLink = {
+  name: string;
+  link: string;
+}
 
 const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
-  const navLinks = [
+  const [toggle, setToggle] = useState<boolean>(false);
+  const navLinks: NavLink[] = [
     { name: 'home', link: 'home' },
     { name: 'about', link: 'about' },
     { name: 'works', link: 'works' },
@@ -25,7 +33,7 @@ const Navbar = () => {
     <nav className="app__navbar">
       <div className="app__navbar-logo">
         <Link href="/" onClick={() => window.scrollTo(0, 0)}>
-          <Image src={images.logo} height={100} width={100} alt='logo'/>
+          <Image src={images.logo} height={100} width={100} alt='logo' />
         </Link>
       </div>
       <ul className="app__navbar-links">
@@ -51,9 +59,9 @@ const Navbar = () => {
             <ul>
               {navLinks.map((item) => (
                 <li key={`menu-${item.name}`}>
-                  <a href={`#${item.link}`} onClick={() => setToggle(false)}>
+                  <Link href={`#${item.link}`} onClick={() => setToggle(false)}>
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

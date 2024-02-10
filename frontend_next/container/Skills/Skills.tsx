@@ -1,23 +1,43 @@
-'use client';
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import ReactTooltip from "react-tooltip";
-
-import { AppWrap, MotionWrap } from '../../wrapper';
-import { urlFor, client } from '../../sanity-client/client';
-import './Skills.scss';
 import Image from 'next/image';
+// import ReactTooltip from "react-tooltip";
+
+// Component Wrapper
+import { AppWrap, MotionWrap } from "@/wrapper";
+
+// Sanity Client
+import { urlFor, client } from "@/sanity-client/client";
+
+// Type
+import { Experience, Skill } from '@/models/Portfolio.type';
+
+// Style
+import './Skills.scss';
 
 const Skills = () => {
-  const [experiences, setExperiences] = useState<any[]>([]); // FIXME:
-  const [skills, setSkills] = useState<any[]>([]); // FIXME:
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
 
   const fetchSkillsAndExperiencesSection = async () => {
-    const experiencesQuery = '*[_type == "experiences"]';
-    const skillsQuery = '*[_type == "skills"]';
+    const experiencesQuery: string = `*[_type == "experiences"]{
+      year,
+      works[]{
+        role,
+        company,
+        description
+      }
+    }`;
+    const skillsQuery: string = `*[_type == "skills"]{
+      name,
+      bgColor,
+      icon
+    }`;
 
-    const experiencesResponse = await client.fetch(experiencesQuery);
-    const skillsResponse = await client.fetch(skillsQuery);
+    const experiencesResponse = await client.fetch<Experience[]>(experiencesQuery);
+    const skillsResponse = await client.fetch<Skill[]>(skillsQuery);
 
     setExperiences(experiencesResponse);
     setSkills(skillsResponse);
@@ -35,7 +55,7 @@ const Skills = () => {
 
       <div className="app__skills-container">
         <motion.div className="app__skills-list">
-          {skills?.map((skill) => (
+          {skills.map((skill) => (
             <motion.div
               key={skill.name}
               className="app__skills-item app__flex"
@@ -54,29 +74,29 @@ const Skills = () => {
         </motion.div>
 
         <motion.div className="app__skills-exp">
-          {experiences?.map((experience) => (
+          {experiences.map((experience) => (
             <motion.div className="app__skills-exp-item" key={experience.year}>
               <div className="app__skills-exp-year">
                 <p className="bold-text">{experience.year}</p>
               </div>
 
               <motion.div className="app__skills-exp-works">
-                {experience.works.map((work: any) => (
-                  <React.Fragment key={work.name}>
+                {experience.works.map((work, i) => (
+                  <React.Fragment key={work.role}>
                     <motion.div
                       whileInView={{ opacity: [0, 1] }}
                       transition={{ duration: 0.5 }}
                       className="app__skills-exp-work"
                       data-tip
-                      data-for={work.name}
-                      key={work.name}
+                      data-for={work.role}
+                      key={i}
                       onMouseEnter={() => showTooltip(true)}
                       onMouseLeave={() => {
                         showTooltip(false);
                         setTimeout(() => showTooltip(true), 50);
                       }}
                     >
-                      <h4 className="bold-text">{work.name}</h4>
+                      <h4 className="bold-text">{work.role}</h4>
                       <p className="p-text">{work.company}</p>
                     </motion.div>
 
@@ -87,7 +107,7 @@ const Skills = () => {
                         effect="float"
                         arrowColor="#fff"
                         className="skills-tooltip"
-                      >{work.desc}</ReactTooltip>
+                      >{work.description}</ReactTooltip>
                     )} */}
                   </React.Fragment>
                 ))}

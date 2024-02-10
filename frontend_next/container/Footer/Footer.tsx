@@ -1,34 +1,50 @@
 'use client';
+
 import { ChangeEvent, useEffect, useState } from 'react';
-import emailjs from '@emailjs/browser';
-
-import { images } from '../../constants';
-import { AppWrap, MotionWrap } from '../../wrapper';
-import { validateEmail, Notify } from '../../utils';
-import { client } from '../../sanity-client/client';
-
-import './Footer.scss';
 import Image from 'next/image';
 
-export async function getStaticProps() {
-  return await client.fetch(`*[_type == "contact"][0]`)
-}
+// Email JS
+import emailjs from '@emailjs/browser';
+
+// Static image
+import { images } from '@/constants';
+
+// Component Wrapper
+import { AppWrap, MotionWrap } from '@/wrapper';
+
+// Utils
+import { validateEmail, Notify } from '@/utils';
+
+// Sanity Client
+import { client } from '@/sanity-client/client';
+
+// Type
+import { Contact, ContactForm } from '@/models/Portfolio.type';
+
+// Style
+import './Footer.scss';
 
 const Footer = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactForm>({
     name: '',
     email: '',
     message: '',
   });
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [contact, setContact] = useState<any>(null); // FIXME:
+  const [contact, setContact] = useState<Contact | null>(null);
 
   const fetchContactSection = async () => {
-    const contactQuery = '*[_type == "contact"][0]'; // a single document (an object is returned, not an array)
 
-    const contactResponse = await client.fetch(contactQuery);
+    // A single document (an object is returned, not an array)
+    const contactQuery: string = `*[_type == "contact"][0]{
+      email,
+      phoneNumber
+    }`;
+
+    const contactResponse = await client.fetch<Contact>(contactQuery);
+    
     setContact(contactResponse);
   };
 

@@ -27,7 +27,7 @@ export default defineType({
     }),
     defineField({
       name: 'imgUrl',
-      title: 'ImageUrl',
+      title: 'Image URL',
       type: 'image',
       options: {
         hotspot: true,
@@ -37,13 +37,12 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [defineArrayMember(
-        {
+      of: [
+        defineArrayMember({
           name: 'tag',
           title: 'Tag',
           type: 'string'
-        }
-      )]
+        })]
     }),
 
   ],

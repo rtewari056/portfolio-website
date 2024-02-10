@@ -1,24 +1,35 @@
-'use client';
+"use client";
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-
-import { AppWrap, MotionWrap } from '../../wrapper';
-import { urlFor, client } from '../../sanity-client/client';
-import './OpenSource.scss';
 import Image from 'next/image';
 
-export async function getStaticProps() {
-  return await client.fetch(`*[_type == "openSource"][0]`)
-}
+// Component Wrapper
+import { AppWrap, MotionWrap } from "@/wrapper";
+
+// Sanity Client
+import { urlFor, client } from "@/sanity-client/client";
+
+// Type
+import { OpenSource } from '@/models/Portfolio.type';
+
+// Style
+import './OpenSource.scss';
+import Link from 'next/link';
 
 const OpenSource = () => {
-  const [openSource, setOpenSource] = useState<any[]>([]); // FIXME:
+  const [openSource, setOpenSource] = useState<OpenSource[]>([]);
 
   const fetchOpenSourceSection = async () => {
-    const openSourceQuery = '*[_type == "openSource"]';
+    const openSourceQuery: string = `*[_type == "openSource"]{
+      name,
+      prLink,
+      imgUrl
+    }`;
 
-    const openSourceResponse = await client.fetch(openSourceQuery);
-    setOpenSource(openSourceResponse);
+    const response = await client.fetch<OpenSource[]>(openSourceQuery);
+    
+    setOpenSource(response);
   };
 
   useEffect(() => {
@@ -32,20 +43,20 @@ const OpenSource = () => {
         Open Source <span>Contributions</span>
       </h2>
 
-      <p className="bold-text " style={{textAlign: "center"}}>
-      Top Open Source Contributons to Various Orgs/Companies
+      <p className="bold-text" style={{ textAlign: "center" }}>
+        Top Open Source Contributons to Various Orgs/Companies
       </p>
 
       <div className="app__opensource-organization app__flex">
-        {openSource.map((os: any) => (
+        {openSource.map((os, i) => (
           <motion.div
             whileInView={{ opacity: [0, 1] }}
             transition={{ duration: 0.5, type: "tween" }}
-            key={os._id}
+            key={i}
           >
-            <a title={os.name} href={os.prLink} target="_blank" rel="noopener noreferrer">
+            <Link title={os.name} href={os.prLink} target="_blank" rel="noopener noreferrer">
               <Image width={100} height={100} src={urlFor(os.imgUrl)} alt={os.name} />
-            </a>
+            </Link>
           </motion.div>
         ))}
       </div>

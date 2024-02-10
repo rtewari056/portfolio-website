@@ -3,21 +3,40 @@
 import { useState, useEffect } from 'react';
 import { AiFillEye, AiFillGithub } from 'react-icons/ai';
 import { motion } from 'framer-motion';
-
-import { AppWrap, MotionWrap } from '../../wrapper';
-import { urlFor, client } from '../../sanity-client/client';
-import './Work.scss';
 import Image from 'next/image';
 
+// Component Wrapper
+import { AppWrap, MotionWrap } from "@/wrapper";
+
+// Sanity Client
+import { urlFor, client } from "@/sanity-client/client";
+
+// Style
+import './Work.scss';
+
+// Type
+import { Work } from '@/models/Portfolio.type';
+type AnimateCard = {
+  y: number;
+  opacity: number;
+}
+
 const Work = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [animateCard, setAnimateCard] = useState<any>({ y: 0, opacity: 1 }); // FIXME:
-  const [works, setWorks] = useState<any[]>([]); // FIXME:
-  const [filterWork, setFilterWork] = useState<any[]>([]); // FIXME:
+  const [activeFilter, setActiveFilter] = useState<string>('All');
+  const [animateCard, setAnimateCard] = useState<AnimateCard>({ y: 0, opacity: 1 });
+  const [works, setWorks] = useState<Work[]>([]);
+  const [filterWork, setFilterWork] = useState<Work[]>([]);
 
   const fetchWorkSection = async () => {
-    const query = '*[_type == "works"]';
-    const response = await client.fetch(query);
+    const query = `*[_type == "works"]{
+      title,
+      description,
+      projectLink,
+      codeLink,
+      imgUrl,
+      tags
+    }`;
+    const response = await client.fetch<Work[]>(query);
 
     setWorks(response);
     setFilterWork(response);
@@ -29,12 +48,12 @@ const Work = () => {
 
   const handleWorkFilter = (item: string) => {
     setActiveFilter(item);
-    setAnimateCard([{ y: 100, opacity: 0 }]); // Trigger animation
+    setAnimateCard({ y: 100, opacity: 0 }); // Trigger animation
 
     setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
+      setAnimateCard({ y: 0, opacity: 1 });
 
-      if (item === "All") {
+      if (item === 'All') {
         setFilterWork(works);
       } else {
         setFilterWork(works.filter((work) => work.tags.includes(item))); // Implementing project filter
@@ -51,12 +70,11 @@ const Work = () => {
       <div className="app__work-filter">
         {/* Filter project type */}
         {["UI/UX", "Web App", "MERN App", "React JS", "All"].map(
-          (item: string, index: number) => (
+          (item, i) => (
             <div
-              key={index}
-              className={`app__work-filter-item app__flex p-text ${
-                activeFilter === item ? "item-active" : ""
-              }`}
+              key={i}
+              className={`app__work-filter-item app__flex p-text ${activeFilter === item ? "item-active" : ""
+                }`}
               onClick={() => handleWorkFilter(item)}
             >
               {item}
@@ -73,7 +91,7 @@ const Work = () => {
         {filterWork.map((work, index) => (
           <div key={index} className="app__work-item app__flex">
             <div className="app__work-img app__flex">
-              <Image width={100} height={100} src={urlFor(work.imgUrl)} alt={work.name} />
+              <Image width={100} height={100} src={urlFor(work.imgUrl)} alt={work.title} />
 
               <motion.div
                 className="app__work-hover app__flex"

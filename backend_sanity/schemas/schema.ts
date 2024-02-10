@@ -4,7 +4,7 @@ import brands from './brands.schema';
 import about from './about.schema';
 import experiences from './experiences.schema';
 import skills from './skills.schema';
-import workExperience from './workExperience.schema';
+// import workExperience from './workExperience.schema';
 import contact from './contact.schema';
 import openSource from './openSource.schema';
 import home from './home.schema';
@@ -16,7 +16,7 @@ export default [
   brands,
   about,
   skills,
-  workExperience,
+  // workExperience,
   experiences,
   contact,
   openSource
