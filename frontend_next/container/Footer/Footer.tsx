@@ -16,7 +16,7 @@ import { AppWrap, MotionWrap } from '@/wrapper';
 import { validateEmail, Notify } from '@/utils';
 
 // Sanity Client
-import { client } from '@/sanity-client/client';
+import { client, urlFor } from '@/sanity-client/client';
 
 // Type
 import { Contact, ContactForm } from '@/models/Portfolio.type';
@@ -40,11 +40,13 @@ const Footer = () => {
     // A single document (an object is returned, not an array)
     const contactQuery: string = `*[_type == "contact"][0]{
       email,
-      phoneNumber
+      emailLogo,
+      phoneNumber,
+      phoneLogo
     }`;
 
     const contactResponse = await client.fetch<Contact>(contactQuery);
-    
+
     setContact(contactResponse);
   };
 
@@ -102,26 +104,28 @@ const Footer = () => {
         Take a <span>coffee</span> & <span>chat</span> with me
       </h2>
 
-      <div className="app__footer-cards">
+      {/* Display contact cards when data is fetched */}
+      {contact !== null && <div className="app__footer-cards">
         <div className="app__footer-card ">
-          <Image width={100} height={100} src={images.email} alt="email" />
+          <Image width={100} height={100} src={urlFor(contact.emailLogo)} alt="email logo" />
           <a
-            href={`mailto:${contact !== null ? contact.email : ""}`}
+            href={`mailto:${contact.email}`}
             className="p-text-dark"
           >
-            {contact !== null ? contact.email : ""}
+            {contact.email}
           </a>
         </div>
         <div className="app__footer-card">
-          <Image width={100} height={100} src={images.mobile} alt="phone" />
+          <Image width={100} height={100} src={urlFor(contact.phoneLogo)} alt="phone logo" />
           <a
-            href={`tel:${contact !== null ? contact.phoneNumber : ""}`}
+            href={`tel:${contact.phoneNumber}`}
             className="p-text-dark"
           >
-            {contact !== null ? contact.phoneNumber : ""}
+            {contact.phoneNumber}
           </a>
         </div>
-      </div>
+      </div>}
+
       {!isFormSubmitted ? (
         <div className="app__footer-form app__flex">
           <div className="app__flex">

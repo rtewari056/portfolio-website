@@ -11,9 +11,25 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'emailLogo',
+      title: 'Email Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'phoneNumber',
       title: 'Phone Number',
       type: 'string',
+    }),
+    defineField({
+      name: 'phoneLogo',
+      title: 'Phone Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
   ],
 });

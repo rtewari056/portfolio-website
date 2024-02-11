@@ -1,6 +1,6 @@
 #home {
   position: relative;
-  background: url("../../public/images/bgIMG.png");
+  background: url("../../public/images/bgDesktopNavbar.webp");
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
@@ -173,11 +173,11 @@
   align-items: flex-end;
   position: relative;
 
-  // img {
-  //   width: 100%;
-  //   object-fit: contain;
-  //   z-index: 1;
-  // }
+  img {
+    width: 100%;
+    object-fit: contain;
+    z-index: 1;
+  }
 
   .overlay_circle {
     position: absolute;

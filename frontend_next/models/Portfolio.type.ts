@@ -27,7 +27,9 @@ export type About = {
 // Contact model
 export type Contact = {
     email: string;
+    emailLogo: Properties;
     phoneNumber: string;
+    phoneLogo: Properties;
 }
 
 // Open Source model

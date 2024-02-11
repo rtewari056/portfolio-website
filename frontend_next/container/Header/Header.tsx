@@ -39,9 +39,9 @@ const Header = () => {
       circleImg2,
       circleImg3,
     }`;
-  
+
     const response = await client.fetch<Home>(homeQuery);
-  
+
     setHome(response);
   }
 
@@ -81,7 +81,7 @@ const Header = () => {
       >
         {/* Display profile image when image is fetched */}
         {home !== null && (
-          <Image priority width={400} height={400} style={{width: "100%", height: "auto", objectFit: 'cover', zIndex: 1}} src={urlFor(home.profilePic)} alt="profile pic" />
+          <Image priority width={400} height={400} style={{ height: "auto" }} src={urlFor(home.profilePic)} alt="profile pic" />
         )}
         {home !== null && <motion.img
           className="overlay_circle"
