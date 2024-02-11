@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 // Global style
 import "@/styles/global.scss";
@@ -24,7 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={dmSans.variable}>{children}</body>
+      <body className={dmSans.variable}>
+        {/* Make sure to keep toaster above children */}
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 }

@@ -64,13 +64,15 @@ const Footer = () => {
     // If any field is missing
     if (!formData.name || !formData.email || !formData.message) {
       setIsLoading(false);
-      return Notify('Please fill all the fields', 'warn');
+      Notify('Please fill all the fields', 'error');
+      return;
     }
 
     // Check email is valid
     if (validateEmail(formData.email) === false) {
       setIsLoading(false);
-      return Notify('Email is not valid', 'warn');
+      Notify('Email is not valid', 'error');
+      return;
     }
 
     // Send Email using EmailJS
@@ -85,16 +87,20 @@ const Footer = () => {
         .then(
           function () {
             setIsLoading(false);
-            return setIsFormSubmitted(true);
+            setIsFormSubmitted(true);
+            Notify('Form is successfully submitted', 'success');
+            return;
           },
           function () {
             setIsLoading(false);
-            return Notify('Some error occured', 'error');
+            Notify('Some error occured', 'error');
+            return;
           }
         );
     } catch (error) {
       setIsLoading(false);
-      return Notify('Some error occured', 'error');
+      Notify('Some error occured', 'error');
+      return;
     }
   };
 
