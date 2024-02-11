@@ -6,7 +6,7 @@ const SocialMedia = () => {
   return (
     <div className="app__social">
       <a
-        href="https://www.linkedin.com/in/rtewari056/"
+        href="https://www.linkedin.com/in/rohittewari"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn icon"

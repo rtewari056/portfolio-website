@@ -3,10 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-// import ReactTooltip from "react-tooltip";
 
 // Component Wrapper
 import { AppWrap, MotionWrap } from "@/wrapper";
+
+// Component
+import { Tooltip } from '@/components';
 
 // Sanity Client
 import { urlFor, client } from "@/sanity-client/client";
@@ -47,8 +49,6 @@ const Skills = () => {
     fetchSkillsAndExperiencesSection();
   }, []);
 
-  const [tooltip, showTooltip] = useState(true);
-
   return (
     <>
       <h2 className="head-text">Skills & <span>Experiences</span> </h2>
@@ -81,35 +81,19 @@ const Skills = () => {
               </div>
 
               <motion.div className="app__skills-exp-works">
-                {experience.works.map((work, i) => (
-                  <React.Fragment key={work.role}>
+                {experience.works.map((work) => (
+                  <Tooltip key={work.role} message={work.description}>
                     <motion.div
                       whileInView={{ opacity: [0, 1] }}
                       transition={{ duration: 0.5 }}
                       className="app__skills-exp-work"
                       data-tip
                       data-for={work.role}
-                      key={i}
-                      onMouseEnter={() => showTooltip(true)}
-                      onMouseLeave={() => {
-                        showTooltip(false);
-                        setTimeout(() => showTooltip(true), 50);
-                      }}
                     >
                       <strong className="bold-text">{work.role}</strong>
                       <p className="p-text">{work.company}</p>
                     </motion.div>
-
-                    {/* React 18: Tooltips not hiding quick fix until the package is updated */}
-                    {/* {tooltip && (
-                      <ReactTooltip
-                        id={work.name}
-                        effect="float"
-                        arrowColor="#fff"
-                        className="skills-tooltip"
-                      >{work.description}</ReactTooltip>
-                    )} */}
-                  </React.Fragment>
+                  </Tooltip>
                 ))}
               </motion.div>
             </motion.div>

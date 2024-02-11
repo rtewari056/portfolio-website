@@ -1,0 +1,8 @@
+.tooltip-container {
+    @apply relative flex;
+}
+
+.tooltip {
+    @apply absolute bottom-20 transition-all duration-300 rounded bg-white p-2 text-xs text-black;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
