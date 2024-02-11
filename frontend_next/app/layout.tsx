@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
+
+// Global style
 import "@/styles/global.scss";
 
-const inter = Inter({ subsets: ["latin"] });
+// Using optimized font from "next/font"
+const dmSans = DM_Sans({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-base' // Custom variable to use this specific font in app
+});
 
 export const metadata: Metadata = {
-  title: "Rohit Tewari Portfolio",
-  description: "Portfolio website built using Next js and Sanity CMS",
+  title: 'Rohit Tewari Portfolio',
+  description: 'Portfolio website built using Next js and Sanity CMS',
 };
 
 export default function RootLayout({
@@ -16,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={dmSans.variable}>{children}</body>
     </html>
   );
 }

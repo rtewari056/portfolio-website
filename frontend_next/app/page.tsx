@@ -1,8 +1,10 @@
 "use client";
+
 import { Navbar } from "@/components";
 import { About, Footer, Header, OpenSource, Skills, Work } from "@/container";
 import { ToastContainer } from "react-toastify";
 
+// App style
 import '@/styles/app.scss'
 
 export default function Home() {
