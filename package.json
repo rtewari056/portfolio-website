@@ -12,6 +12,7 @@
     "@emailjs/browser": "^4.4.1",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.31.1",
+    "@vercel/analytics": "^2.0.1",
     "motion": "^12.40.0",
     "next": "16.2.9",
     "next-sanity": "^13.1.1",

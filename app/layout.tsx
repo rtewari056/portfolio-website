@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
+// Analytics for Vercel
+import { Analytics } from "@vercel/analytics/next";
+
 // Global style
 import "@/styles/global.scss";
 
@@ -29,6 +32,7 @@ export default function RootLayout({
         {/* Make sure to keep toaster above children */}
         <Toaster />
         {children}
+        <Analytics />
       </body>
     </html>
   );
